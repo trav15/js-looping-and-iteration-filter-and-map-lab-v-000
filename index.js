@@ -1,21 +1,33 @@
 // Code your solution here:
-function lowerCaseDrivers(list) {
-  return list.map(function(driver) {
-    return driver.toLowerCase();
+
+function driversWithRevenueOver (drivers, revenue) {
+  return drivers.filter(function (driver) {
+    return driver.revenue > revenue;
   });
 }
 
-function nameToAttributes(list) {
-  return list.map(function(driver) {
-    const driverFirst = driver.split(' ')[0];
-    const driverLast = driver.split(' ')[1];
+function driverNamesWithRevenueOver (drivers, revenue) {
+  return driversWithRevenueOver(drivers, revenue)
+    .map(function (driver) {
+      return driver.name;
+    });
+}
 
-    return { firstName: driverFirst, lastName: driverLast };
+function exactMatch (drivers, matcher) {
+  return drivers.filter(function (driver) {
+    let matches = false;
+
+    for (const key in matcher) {
+      matches = driver[key] === matcher[key];
+    }
+
+    return matches;
   });
 }
 
-function attributesToPhrase(drivers) {
-  return drivers.map(function(driver) {
-    return `${driver.name} is from ${driver.hometown}`;
-  });
+function exactMatchToList (drivers, matcher) {
+  return exactMatch(drivers, matcher)
+    .map(function (driver) {
+      return driver.name;
+    });
 }
